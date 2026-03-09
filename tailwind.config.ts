@@ -9,8 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        charcoal: "#1C1C1A",
+        cream: "#F2EBD9",
+        sienna: "#C94F2C",
+        olive: "#4A4A2F",
+      },
+      fontFamily: {
+        headline: ['"Bebas Neue"', "sans-serif"],
+        body: ['"Libre Baskerville"', "serif"],
       },
     },
   },
