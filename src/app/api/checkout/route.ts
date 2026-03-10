@@ -2,7 +2,10 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 
 // STRIPE_SECRET_KEY is set in .env.local
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  timeout: 10000,
+  maxNetworkRetries: 3,
+});
 
 export async function POST(req: Request) {
   try {
