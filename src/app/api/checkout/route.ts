@@ -8,13 +8,16 @@ export async function POST(req: Request) {
   try {
     const { items } = await req.json();
 
+    // Derive base URL from the incoming request
+    const url = new URL(req.url);
+    const baseUrl = `${url.protocol}//${url.host}`;
+
     const line_items = items.map(
       (item: {
         id: string;
         name: string;
         price: number;
         quantity: number;
-        image: string;
       }) => ({
         price_data: {
           currency: "usd",
@@ -30,8 +33,8 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items,
-      success_url: `${process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.BASE_URL || process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/cancelled`,
+      success_url: `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${baseUrl}/cancelled`,
       shipping_address_collection: {
         allowed_countries: ["US"],
       },
