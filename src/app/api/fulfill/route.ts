@@ -8,11 +8,11 @@ const GOOTEN_BILLING_KEY = process.env.GOOTEN_BILLING_KEY!;
 const CALENDAR_VARIANTS: Record<string, { sku: string; printPath: string }> = {
   "24x36": {
     sku: "Posters-24x36-180gsm-Matte",
-    printPath: "/print/bible-reading-calendar-2026-24x36.pdf",
+    printPath: "/print/bible-reading-calendar-2026-24x36.png",
   },
   "36x48": {
     sku: "Posters-36x48-PremiumMatte",
-    printPath: "/print/bible-reading-calendar-2026.pdf",
+    printPath: "/print/bible-reading-calendar-2026-36x48.png",
   },
 };
 
