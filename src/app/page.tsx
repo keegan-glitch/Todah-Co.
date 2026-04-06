@@ -97,8 +97,9 @@ export default function Home() {
                   {calendar.description}
                 </p>
                 <p className="font-headline text-2xl text-cream mt-6">
-                  ${calendar.price.toFixed(2)}
+                  From ${calendar.price.toFixed(2)}
                 </p>
+                <p className="font-body text-cream/40 text-sm mt-1">Free shipping</p>
                 <div className="mt-8">
                   <span className="inline-block px-10 py-4 bg-cream text-charcoal font-headline text-base tracking-[0.2em] uppercase border-2 border-cream transition-all duration-300 group-hover:bg-transparent group-hover:text-cream">
                     View Calendar

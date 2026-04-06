@@ -4,21 +4,22 @@ const GOOTEN_BASE = "https://api.print.io";
 const GOOTEN_RECIPE_ID = process.env.GOOTEN_RECIPE_ID!;
 const GOOTEN_BILLING_KEY = process.env.GOOTEN_BILLING_KEY!;
 
-// Map product IDs to Gooten SKUs and print file URLs
-const GOOTEN_PRODUCTS: Record<string, { sku: string; imageUrl: string }> = {
-  "bible-reading-calendar-2026": {
+// Calendar size variants with Gooten SKUs
+const CALENDAR_VARIANTS: Record<string, { sku: string; printPath: string }> = {
+  "24x36": {
+    sku: "Posters-24x36-180gsm-Matte",
+    printPath: "/print/bible-reading-calendar-2026-24x36.pdf",
+  },
+  "36x48": {
     sku: "Posters-36x48-PremiumMatte",
-    // This must be a publicly accessible URL to the print-ready file
-    // Update this once you upload the hi-res file to a CDN or your Vercel public folder
-    imageUrl: "", // Will be set from CALENDAR_PRINT_URL env var
+    printPath: "/print/bible-reading-calendar-2026.pdf",
   },
 };
 
-function getImageUrl(productId: string): string {
-  if (productId === "bible-reading-calendar-2026") {
-    return process.env.CALENDAR_PRINT_URL || GOOTEN_PRODUCTS[productId].imageUrl;
-  }
-  return GOOTEN_PRODUCTS[productId]?.imageUrl || "";
+function getBaseUrl(): string {
+  return process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : process.env.CALENDAR_PRINT_BASE_URL || "https://todah-co.vercel.app";
 }
 
 export async function POST(req: Request) {
@@ -54,20 +55,20 @@ export async function POST(req: Request) {
       Images: Array<{ Url: string }>;
     }> = [];
 
-    // Check line items for calendar
+    // Check line items for calendar products
+    const baseUrl = getBaseUrl();
     const lineItems = session.line_items?.data || [];
     for (const item of lineItems) {
-      const name = item.description || item.price?.product?.name || "";
-      // Match calendar product by name
-      if (name.toLowerCase().includes("bible reading calendar")) {
-        const imageUrl = getImageUrl("bible-reading-calendar-2026");
-        if (!imageUrl) {
-          console.error("No print URL configured for calendar");
-          continue;
-        }
+      const name = (item.description || item.price?.product?.name || "").toLowerCase();
+      if (name.includes("bible reading calendar")) {
+        // Determine size from the product name
+        const size = name.includes("36x48") || name.includes("36×48") || name.includes("premium") ? "36x48" : "24x36";
+        const variant = CALENDAR_VARIANTS[size];
+        const imageUrl = `${baseUrl}${variant.printPath}`;
+
         gootenItems.push({
           Quantity: item.quantity || 1,
-          SKU: "Posters-36x48-PremiumMatte",
+          SKU: variant.sku,
           ShipType: "standard",
           Images: [{ Url: imageUrl }],
         });

@@ -53,12 +53,26 @@ export const products: Product[] = [
   },
 ];
 
+export type CalendarSize = "24x36" | "36x48";
+
+export type CalendarVariant = {
+  size: CalendarSize;
+  label: string;
+  price: number;
+  sku: string;
+};
+
+export const calendarVariants: CalendarVariant[] = [
+  { size: "24x36", label: "24×36\" Standard", price: 34.99, sku: "Posters-24x36-180gsm-Matte" },
+  { size: "36x48", label: "36×48\" Premium", price: 49.99, sku: "Posters-36x48-PremiumMatte" },
+];
+
 export const calendarProduct: Product = {
   id: "bible-reading-calendar-2026",
   name: "2026 Bible Reading Calendar",
   slug: "bible-reading-calendar",
   description:
-    "Read the entire Bible in one year. A large-format wall calendar with daily readings cycling through Law, History, Wisdom, Prophets, Gospels, and Epistles. 36×48 inch poster on premium matte stock.",
+    "Read the entire Bible in one year. A large-format wall calendar with daily readings cycling through Law, History, Wisdom, Prophets, Gospels, and Epistles. Premium matte poster with free shipping.",
   price: 34.99,
   image: "/images/bible-reading-calendar.jpg",
   category: "calendar",
