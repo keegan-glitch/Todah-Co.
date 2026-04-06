@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getIndividualProducts } from "@/data/products";
+import { getIndividualProducts, getCalendarProduct } from "@/data/products";
 import ScrollReveal from "@/components/ScrollReveal";
 
 const CARD_NUMBERS = ["01", "02", "03"];
 
 export default function Home() {
   const cards = getIndividualProducts();
+  const calendar = getCalendarProduct();
 
   return (
     <>
@@ -59,6 +60,56 @@ export default function Home() {
       </section>
 
       {/* ─── Section Divider ─── */}
+      <div className="max-w-6xl mx-auto px-8">
+        <div className="rule" />
+      </div>
+
+      {/* ─── Bible Reading Calendar ─── */}
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 py-24 sm:py-32">
+        <ScrollReveal>
+          <div className="flex items-center gap-6 mb-16">
+            <span className="font-headline text-sienna text-sm tracking-[0.3em]">NEW</span>
+            <div className="rule flex-1" />
+          </div>
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Link href={`/products/${calendar.slug}`} className="group block">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              {/* Calendar Image */}
+              <div className="relative aspect-[4/3] bg-charcoal/50 border border-cream/10 overflow-hidden">
+                <Image
+                  src={calendar.image}
+                  alt={calendar.name}
+                  fill
+                  className="object-contain p-4 transition-transform duration-700 group-hover:scale-[1.02]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+
+              {/* Details */}
+              <div>
+                <h3 className="font-headline text-3xl sm:text-4xl lg:text-5xl tracking-wider text-cream group-hover:text-sienna transition-colors duration-300 leading-tight">
+                  {calendar.name}
+                </h3>
+                <div className="rule-accent w-12 mt-6 mb-6" />
+                <p className="font-body text-cream/60 text-base sm:text-lg leading-relaxed max-w-md">
+                  {calendar.description}
+                </p>
+                <p className="font-headline text-2xl text-cream mt-6">
+                  ${calendar.price.toFixed(2)}
+                </p>
+                <div className="mt-8">
+                  <span className="inline-block px-10 py-4 bg-cream text-charcoal font-headline text-base tracking-[0.2em] uppercase border-2 border-cream transition-all duration-300 group-hover:bg-transparent group-hover:text-cream">
+                    View Calendar
+                  </span>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </ScrollReveal>
+      </section>
+
       <div className="max-w-6xl mx-auto px-8">
         <div className="rule" />
       </div>

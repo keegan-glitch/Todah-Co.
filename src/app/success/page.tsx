@@ -1,6 +1,26 @@
-import Link from "next/link";
+"use client";
 
-export default function SuccessPage() {
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { Suspense } from "react";
+
+function SuccessContent() {
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+  const fulfilled = useRef(false);
+
+  useEffect(() => {
+    if (sessionId && !fulfilled.current) {
+      fulfilled.current = true;
+      fetch("/api/fulfill", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId }),
+      }).catch((err) => console.error("Fulfillment trigger failed:", err));
+    }
+  }, [sessionId]);
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 text-center">
       <span className="font-headline text-xs tracking-[0.3em] text-sienna uppercase mb-4">
@@ -20,5 +40,13 @@ export default function SuccessPage() {
         Back to Shop
       </Link>
     </main>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense>
+      <SuccessContent />
+    </Suspense>
   );
 }

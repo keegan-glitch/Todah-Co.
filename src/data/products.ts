@@ -6,6 +6,7 @@ export type Product = {
   price: number;
   image: string;
   isBundle?: boolean;
+  category?: "cards" | "calendar";
 };
 
 export const products: Product[] = [
@@ -52,7 +53,19 @@ export const products: Product[] = [
   },
 ];
 
+export const calendarProduct: Product = {
+  id: "bible-reading-calendar-2026",
+  name: "2026 Bible Reading Calendar",
+  slug: "bible-reading-calendar",
+  description:
+    "Read the entire Bible in one year. A large-format wall calendar with daily readings cycling through Law, History, Wisdom, Prophets, Gospels, and Epistles. 36×48 inch poster on premium matte stock.",
+  price: 34.99,
+  image: "/images/bible-reading-calendar.jpg",
+  category: "calendar",
+};
+
 export function getProductBySlug(slug: string): Product | undefined {
+  if (calendarProduct.slug === slug) return calendarProduct;
   return products.find((p) => p.slug === slug);
 }
 
@@ -62,4 +75,8 @@ export function getIndividualProducts(): Product[] {
 
 export function getBundleProduct(): Product | undefined {
   return products.find((p) => p.isBundle);
+}
+
+export function getCalendarProduct(): Product {
+  return calendarProduct;
 }
