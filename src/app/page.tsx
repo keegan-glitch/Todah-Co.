@@ -48,7 +48,7 @@ export default function Home() {
           style={{ animationDelay: "0.9s" }}
         >
           <span className="relative z-10 block px-10 py-4 bg-cream text-charcoal font-headline text-base sm:text-lg tracking-[0.2em] uppercase border-2 border-cream transition-all duration-300 group-hover:bg-transparent group-hover:text-cream">
-            Shop the Collection
+            Shop Now
           </span>
         </Link>
 
