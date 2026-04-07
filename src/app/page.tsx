@@ -92,6 +92,9 @@ export default function Home() {
                 <h3 className="font-headline text-3xl sm:text-4xl lg:text-5xl tracking-wider text-cream group-hover:text-sienna transition-colors duration-300 leading-tight">
                   {calendar.name}
                 </h3>
+                <p className="font-body text-sienna text-sm sm:text-base italic mt-2 tracking-wide">
+                  Carpe Scriptura &mdash; Seize the Word
+                </p>
                 <div className="rule-accent w-12 mt-6 mb-6" />
                 <p className="font-body text-cream/60 text-base sm:text-lg leading-relaxed max-w-md">
                   {calendar.description}

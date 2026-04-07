@@ -43,6 +43,9 @@ export default function CalendarProductPage() {
             <h1 className="font-headline text-4xl sm:text-5xl lg:text-6xl tracking-wider text-cream leading-tight">
               {baseProduct.name}
             </h1>
+            <p className="font-body text-sienna text-base sm:text-lg italic mt-3 tracking-wide">
+              Carpe Scriptura &mdash; Seize the Word
+            </p>
 
             {/* Divider */}
             <div className="rule-accent w-12 mt-6 mb-6" />

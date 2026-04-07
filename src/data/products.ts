@@ -135,7 +135,7 @@ export const calendarProduct: Product = {
   name: "2026 Bible Reading Calendar",
   slug: "bible-reading-calendar",
   description:
-    "Read the entire Bible in one year. A large-format wall calendar with daily readings cycling through Law, History, Wisdom, Prophets, Gospels, and Epistles. Premium matte poster with free shipping.",
+    "Carpe Scriptura — Seize the Word. Read the entire Bible in one year. A large-format wall calendar with daily readings cycling through Law, History, Wisdom, Prophets, Gospels, and Epistles. Premium matte poster with free shipping.",
   price: 34.99,
   image: "/images/bible-reading-calendar.jpg",
   category: "calendar",
