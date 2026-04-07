@@ -68,7 +68,7 @@ export default function Home() {
       <section className="max-w-7xl mx-auto px-6 sm:px-8 py-24 sm:py-32">
         <ScrollReveal>
           <div className="flex items-center gap-6 mb-16">
-            <span className="font-headline text-sienna text-sm tracking-[0.3em]">NEW</span>
+            <span className="font-headline text-sienna text-xl sm:text-2xl tracking-[0.3em]">NEW</span>
             <div className="rule flex-1" />
           </div>
         </ScrollReveal>
@@ -122,7 +122,7 @@ export default function Home() {
       <section className="py-24 sm:py-32 px-6">
         <ScrollReveal>
           <div className="max-w-2xl mx-auto text-center">
-            <span className="font-headline text-xs tracking-[0.3em] text-sienna uppercase">
+            <span className="font-headline text-lg sm:text-xl tracking-[0.3em] text-sienna uppercase">
               What&apos;s in a Name
             </span>
             <div className="rule-accent w-8 mx-auto mt-4 mb-8" />
@@ -143,7 +143,7 @@ export default function Home() {
       <section id="collection" className="max-w-7xl mx-auto px-6 sm:px-8 py-24 sm:py-32">
         <ScrollReveal>
           <div className="flex items-center gap-6 mb-20">
-            <span className="font-headline text-sienna text-sm tracking-[0.3em]">THE COLLECTION</span>
+            <span className="font-headline text-sienna text-xl sm:text-2xl tracking-[0.3em]">THE COLLECTION</span>
             <div className="rule flex-1" />
             <span className="font-body text-cream/30 text-xs italic">3 designs</span>
           </div>
