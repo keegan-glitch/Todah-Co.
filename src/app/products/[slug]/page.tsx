@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { products, getProductBySlug, getBundleProduct } from "@/data/products";
+import { products, getProductBySlug, getBundleProduct, getFivePacks } from "@/data/products";
 import QuantitySelector from "@/components/QuantitySelector";
 import AddToCartButton from "@/components/AddToCartButton";
 
@@ -20,6 +20,8 @@ export default function ProductPage({
   if (!product || product.isBundle) return notFound();
 
   const bundle = getBundleProduct();
+  const fivePacks = getFivePacks();
+  const matchingPack = fivePacks.find((p) => p.image === product.image);
 
   return (
     <main className="min-h-screen pt-28 pb-20 px-6 sm:px-8">
@@ -59,10 +61,24 @@ export default function ProductPage({
                 {product.description}
               </p>
 
+              {/* Details */}
+              <ul className="mt-4 space-y-2 font-body text-cream/50 text-sm">
+                <li className="flex items-center gap-2">
+                  <span className="text-sienna">&#9670;</span> 4.25&times;5.5&quot; folded card with envelope
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-sienna">&#9670;</span> 100# uncoated cover stock
+                </li>
+                <li className="flex items-center gap-2">
+                  <span className="text-sienna">&#9670;</span> Free shipping
+                </li>
+              </ul>
+
               {/* Price */}
               <p className="font-headline text-3xl text-cream mt-8">
                 ${product.price.toFixed(2)}
               </p>
+              <p className="font-body text-cream/40 text-sm mt-1">Free shipping included</p>
 
               {/* Quantity + Add to Cart */}
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -70,23 +86,39 @@ export default function ProductPage({
                 <AddToCartButton product={product} />
               </div>
 
-              {/* Bundle Upsell */}
-              {bundle && (
-                <div className="mt-12 border border-cream/10 p-6">
+              {/* 5-Pack Upsell */}
+              {matchingPack && (
+                <div className="mt-10 border border-cream/10 p-6">
                   <span className="font-headline text-xs tracking-[0.3em] text-sienna uppercase">
-                    Save $3
+                    Save 41%
                   </span>
                   <h3 className="font-headline text-xl tracking-wider text-cream mt-2">
-                    Complete the Collection
+                    Get a Set of 5
                   </h3>
                   <p className="font-body text-cream/50 text-sm mt-2 italic">
-                    All 3 designs &mdash; ${bundle.price.toFixed(2)}
+                    Same design, five cards &mdash; ${matchingPack.price.toFixed(2)} ($4.40/card)
+                  </p>
+                  <AddToCartButton product={matchingPack} />
+                </div>
+              )}
+
+              {/* Variety Box Upsell */}
+              {bundle && (
+                <div className="mt-4 border border-cream/10 p-6">
+                  <span className="font-headline text-xs tracking-[0.3em] text-sienna uppercase">
+                    Best Value
+                  </span>
+                  <h3 className="font-headline text-xl tracking-wider text-cream mt-2">
+                    The Variety Box
+                  </h3>
+                  <p className="font-body text-cream/50 text-sm mt-2 italic">
+                    8 cards, all 3 designs &mdash; ${bundle.price.toFixed(2)} ($3.50/card)
                   </p>
                   <Link
                     href="/collection"
                     className="inline-block mt-4 px-6 py-2 bg-transparent text-cream font-headline text-xs tracking-[0.2em] uppercase border-2 border-cream hover:bg-cream hover:text-charcoal transition-colors duration-300"
                   >
-                    View Bundle
+                    View Box
                   </Link>
                 </div>
               )}

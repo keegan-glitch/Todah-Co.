@@ -83,39 +83,41 @@ export async function POST(req: Request) {
       }
 
       // Card products — match by name to preconfigured Gooten SKUs
-      if (name.includes("heartland")) {
+      // Determine pack size from name
+      const isFivePack = name.includes("set of 5");
+      const cardQty = isFivePack ? 5 * (item.quantity || 1) : (item.quantity || 1);
+
+      if (name.includes("heartland") && !name.includes("variety") && !name.includes("bible")) {
         gootenItems.push({
-          Quantity: item.quantity || 1,
+          Quantity: cardQty,
           SKU: CARD_SKUS["heartland-thanks"],
           ShipType: "standard",
           Images: [],
         });
       } else if (name.includes("trail")) {
         gootenItems.push({
-          Quantity: item.quantity || 1,
+          Quantity: cardQty,
           SKU: CARD_SKUS["thanks-from-the-trail"],
           ShipType: "standard",
           Images: [],
         });
       } else if (name.includes("bar")) {
         gootenItems.push({
-          Quantity: item.quantity || 1,
+          Quantity: cardQty,
           SKU: CARD_SKUS["thank-you-at-the-bar"],
           ShipType: "standard",
           Images: [],
         });
       }
 
-      // Bundle — all 3 cards
-      if (name.includes("complete collection")) {
-        for (const sku of Object.values(CARD_SKUS)) {
-          gootenItems.push({
-            Quantity: item.quantity || 1,
-            SKU: sku,
-            ShipType: "standard",
-            Images: [],
-          });
-        }
+      // Variety Box — 8 cards (3 heartland, 3 trail, 2 bar)
+      if (name.includes("variety box")) {
+        const qty = item.quantity || 1;
+        gootenItems.push(
+          { Quantity: 3 * qty, SKU: CARD_SKUS["heartland-thanks"], ShipType: "standard", Images: [] },
+          { Quantity: 3 * qty, SKU: CARD_SKUS["thanks-from-the-trail"], ShipType: "standard", Images: [] },
+          { Quantity: 2 * qty, SKU: CARD_SKUS["thank-you-at-the-bar"], ShipType: "standard", Images: [] },
+        );
       }
     }
 

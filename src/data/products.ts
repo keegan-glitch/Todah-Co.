@@ -7,17 +7,17 @@ export type Product = {
   image: string;
   isBundle?: boolean;
   category?: "cards" | "calendar";
+  packSize?: number;
 };
 
-export const products: Product[] = [
+// Individual card designs
+export const cardDesigns = [
   {
     id: "heartland-thanks",
     name: "Heartland Thanks",
     slug: "heartland-thanks",
     description:
       "Vintage farm scene — windmill, red barn, wheat fields. Warm golds, barn red, earthy tones. Retro Americana poster style.",
-    price: 6.99,
-    // Card image: swap with final production image if needed
     image: "/images/heartland-thanks.jpg",
   },
   {
@@ -26,8 +26,6 @@ export const products: Product[] = [
     slug: "thanks-from-the-trail",
     description:
       "Classic blue Ford Bronco, red mountains, white wildflowers. Vintage outdoor travel poster style.",
-    price: 6.99,
-    // Card image: swap with final production image if needed
     image: "/images/thanks-from-the-trail.jpg",
   },
   {
@@ -36,20 +34,85 @@ export const products: Product[] = [
     slug: "thank-you-at-the-bar",
     description:
       "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
-    price: 6.99,
-    // Card image: swap with final production image if needed
     image: "/images/thank-you-at-the-bar.jpg",
   },
+];
+
+// Card products (singles + packs)
+export const products: Product[] = [
+  // Singles — $7.50 each
   {
-    id: "complete-collection",
-    name: "The Complete Collection",
-    slug: "complete-collection",
+    id: "heartland-thanks",
+    name: "Heartland Thanks",
+    slug: "heartland-thanks",
     description:
-      "All 3 Todah Co. designs in one box. One box. Three reasons to say thanks.",
-    price: 17.99,
-    // Bundle image: swap with a styled bundle photo when available
+      "Vintage farm scene — windmill, red barn, wheat fields. Warm golds, barn red, earthy tones. Retro Americana poster style.",
+    price: 7.50,
+    image: "/images/heartland-thanks.jpg",
+    packSize: 1,
+  },
+  {
+    id: "thanks-from-the-trail",
+    name: "Thanks from the Trail",
+    slug: "thanks-from-the-trail",
+    description:
+      "Classic blue Ford Bronco, red mountains, white wildflowers. Vintage outdoor travel poster style.",
+    price: 7.50,
+    image: "/images/thanks-from-the-trail.jpg",
+    packSize: 1,
+  },
+  {
+    id: "thank-you-at-the-bar",
+    name: '"Thank You" Ready at the Bar',
+    slug: "thank-you-at-the-bar",
+    description:
+      "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
+    price: 7.50,
+    image: "/images/thank-you-at-the-bar.jpg",
+    packSize: 1,
+  },
+  // Set of 5 — $22.00 (pick your design)
+  {
+    id: "heartland-thanks-5pack",
+    name: "Heartland Thanks — Set of 5",
+    slug: "heartland-thanks-5pack",
+    description:
+      "Five Heartland Thanks cards. Stock your desk with your favorite design.",
+    price: 22.00,
+    image: "/images/heartland-thanks.jpg",
+    packSize: 5,
+  },
+  {
+    id: "thanks-from-the-trail-5pack",
+    name: "Thanks from the Trail — Set of 5",
+    slug: "thanks-from-the-trail-5pack",
+    description:
+      "Five Thanks from the Trail cards. Stock your desk with your favorite design.",
+    price: 22.00,
+    image: "/images/thanks-from-the-trail.jpg",
+    packSize: 5,
+  },
+  {
+    id: "thank-you-at-the-bar-5pack",
+    name: '"Thank You" Ready at the Bar — Set of 5',
+    slug: "thank-you-at-the-bar-5pack",
+    description:
+      "Five Ready at the Bar cards. Stock your desk with your favorite design.",
+    price: 22.00,
+    image: "/images/thank-you-at-the-bar.jpg",
+    packSize: 5,
+  },
+  // Variety Box of 8 — $28.00
+  {
+    id: "variety-box-8",
+    name: "The Variety Box",
+    slug: "variety-box",
+    description:
+      "Eight cards across all three Todah Co. designs. The complete thank you toolkit.",
+    price: 28.00,
     image: "/images/heartland-thanks.jpg",
     isBundle: true,
+    packSize: 8,
   },
 ];
 
@@ -83,8 +146,16 @@ export function getProductBySlug(slug: string): Product | undefined {
   return products.find((p) => p.slug === slug);
 }
 
+export function getSingleCards(): Product[] {
+  return products.filter((p) => !p.isBundle && p.packSize === 1);
+}
+
+export function getFivePacks(): Product[] {
+  return products.filter((p) => p.packSize === 5);
+}
+
 export function getIndividualProducts(): Product[] {
-  return products.filter((p) => !p.isBundle);
+  return products.filter((p) => !p.isBundle && p.packSize === 1);
 }
 
 export function getBundleProduct(): Product | undefined {

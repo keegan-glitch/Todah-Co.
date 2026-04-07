@@ -202,12 +202,12 @@ export default function Home() {
         <ScrollReveal delay={200}>
           <div className="mt-20 border border-cream/10 p-8 sm:p-12 flex flex-col sm:flex-row items-center justify-between gap-6">
             <div>
-              <span className="font-headline text-xs tracking-[0.3em] text-sienna">SAVE $3</span>
+              <span className="font-headline text-xs tracking-[0.3em] text-sienna">BEST VALUE</span>
               <h3 className="font-headline text-2xl sm:text-3xl tracking-wider text-cream mt-2">
-                The Complete Collection
+                The Variety Box
               </h3>
               <p className="font-body text-cream/50 text-sm mt-2 italic">
-                All three designs &mdash; $17.99
+                8 cards, all 3 designs &mdash; $28.00 &mdash; Free shipping
               </p>
             </div>
             <Link
