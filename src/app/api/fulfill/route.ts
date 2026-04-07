@@ -16,6 +16,13 @@ const CALENDAR_VARIANTS: Record<string, { sku: string; printPath: string }> = {
   },
 };
 
+// Card products — preconfigured in Gooten (images already uploaded)
+const CARD_SKUS: Record<string, string> = {
+  "heartland-thanks": "Greet-Fold-425x55-Finch-Single-1Pack-20260406200824167",
+  "thanks-from-the-trail": "Greet-Fold-425x55-Finch-Single-1Pack-20260406201057358",
+  "thank-you-at-the-bar": "Greet-Fold-425x55-Finch-Single-1Pack-20260406200326918",
+};
+
 function getBaseUrl(): string {
   return process.env.NEXT_PUBLIC_VERCEL_URL
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
@@ -55,13 +62,14 @@ export async function POST(req: Request) {
       Images: Array<{ Url: string }>;
     }> = [];
 
-    // Check line items for calendar products
+    // Check line items for all Gooten-fulfilled products
     const baseUrl = getBaseUrl();
     const lineItems = session.line_items?.data || [];
     for (const item of lineItems) {
       const name = (item.description || item.price?.product?.name || "").toLowerCase();
+
+      // Calendar products
       if (name.includes("bible reading calendar")) {
-        // Determine size from the product name
         const size = name.includes("36x48") || name.includes("36×48") || name.includes("premium") ? "36x48" : "24x36";
         const variant = CALENDAR_VARIANTS[size];
         const imageUrl = `${baseUrl}${variant.printPath}`;
@@ -73,10 +81,45 @@ export async function POST(req: Request) {
           Images: [{ Url: imageUrl }],
         });
       }
+
+      // Card products — match by name to preconfigured Gooten SKUs
+      if (name.includes("heartland")) {
+        gootenItems.push({
+          Quantity: item.quantity || 1,
+          SKU: CARD_SKUS["heartland-thanks"],
+          ShipType: "standard",
+          Images: [],
+        });
+      } else if (name.includes("trail")) {
+        gootenItems.push({
+          Quantity: item.quantity || 1,
+          SKU: CARD_SKUS["thanks-from-the-trail"],
+          ShipType: "standard",
+          Images: [],
+        });
+      } else if (name.includes("bar")) {
+        gootenItems.push({
+          Quantity: item.quantity || 1,
+          SKU: CARD_SKUS["thank-you-at-the-bar"],
+          ShipType: "standard",
+          Images: [],
+        });
+      }
+
+      // Bundle — all 3 cards
+      if (name.includes("complete collection")) {
+        for (const sku of Object.values(CARD_SKUS)) {
+          gootenItems.push({
+            Quantity: item.quantity || 1,
+            SKU: sku,
+            ShipType: "standard",
+            Images: [],
+          });
+        }
+      }
     }
 
     if (gootenItems.length === 0) {
-      // No Gooten-fulfilled items in this order (e.g., cards only)
       return NextResponse.json({ message: "No POD items to fulfill" });
     }
 
