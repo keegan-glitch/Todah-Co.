@@ -13,6 +13,14 @@ export type Product = {
 // Individual card designs
 export const cardDesigns = [
   {
+    id: "thank-you-at-the-bar",
+    name: '"Thank You" Ready at the Bar',
+    slug: "thank-you-at-the-bar",
+    description:
+      "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
+    image: "/images/thank-you-at-the-bar.jpg",
+  },
+  {
     id: "heartland-thanks",
     name: "Heartland Thanks",
     slug: "heartland-thanks",
@@ -27,14 +35,6 @@ export const cardDesigns = [
     description:
       "Classic blue Ford Bronco, red mountains, white wildflowers. Vintage outdoor travel poster style.",
     image: "/images/thanks-from-the-trail.jpg",
-  },
-  {
-    id: "thank-you-at-the-bar",
-    name: '"Thank You" Ready at the Bar',
-    slug: "thank-you-at-the-bar",
-    description:
-      "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
-    image: "/images/thank-you-at-the-bar.jpg",
   },
 ];
 
@@ -42,6 +42,16 @@ export const cardDesigns = [
 export const products: Product[] = [
   // Singles — $7.50 each
   {
+    id: "thank-you-at-the-bar",
+    name: '"Thank You" Ready at the Bar',
+    slug: "thank-you-at-the-bar",
+    description:
+      "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
+    price: 7.50,
+    image: "/images/thank-you-at-the-bar.jpg",
+    packSize: 1,
+  },
+  {
     id: "heartland-thanks",
     name: "Heartland Thanks",
     slug: "heartland-thanks",
@@ -61,17 +71,17 @@ export const products: Product[] = [
     image: "/images/thanks-from-the-trail.jpg",
     packSize: 1,
   },
-  {
-    id: "thank-you-at-the-bar",
-    name: '"Thank You" Ready at the Bar',
-    slug: "thank-you-at-the-bar",
-    description:
-      "Comic book/pop-art barista in a coffee shop. Bold, fun, urban.",
-    price: 7.50,
-    image: "/images/thank-you-at-the-bar.jpg",
-    packSize: 1,
-  },
   // Set of 5 — $22.00 (pick your design)
+  {
+    id: "thank-you-at-the-bar-5pack",
+    name: '"Thank You" Ready at the Bar — Set of 5',
+    slug: "thank-you-at-the-bar-5pack",
+    description:
+      "Five Ready at the Bar cards. Stock your desk with your favorite design.",
+    price: 22.00,
+    image: "/images/thank-you-at-the-bar.jpg",
+    packSize: 5,
+  },
   {
     id: "heartland-thanks-5pack",
     name: "Heartland Thanks — Set of 5",
@@ -90,16 +100,6 @@ export const products: Product[] = [
       "Five Thanks from the Trail cards. Stock your desk with your favorite design.",
     price: 22.00,
     image: "/images/thanks-from-the-trail.jpg",
-    packSize: 5,
-  },
-  {
-    id: "thank-you-at-the-bar-5pack",
-    name: '"Thank You" Ready at the Bar — Set of 5',
-    slug: "thank-you-at-the-bar-5pack",
-    description:
-      "Five Ready at the Bar cards. Stock your desk with your favorite design.",
-    price: 22.00,
-    image: "/images/thank-you-at-the-bar.jpg",
     packSize: 5,
   },
   // Variety Box of 8 — $28.00
