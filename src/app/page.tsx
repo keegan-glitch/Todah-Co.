@@ -250,6 +250,29 @@ export default function Home() {
         </ScrollReveal>
       </section>
 
+      {/* ─── Free Sample CTA ─── */}
+      <section className="py-16 px-6 sm:px-8">
+        <ScrollReveal>
+          <div className="max-w-3xl mx-auto text-center border border-cream/10 p-10 sm:p-14">
+            <span className="font-headline text-xs tracking-[0.3em] text-sienna uppercase">
+              Free Download
+            </span>
+            <h3 className="font-headline text-2xl sm:text-3xl tracking-wider text-cream mt-3">
+              Try the Reading Plan
+            </h3>
+            <p className="font-body text-cream/50 text-sm sm:text-base mt-3 italic max-w-md mx-auto">
+              Get a free 7-day sample of the Carpe Scriptura Bible reading plan delivered to your inbox.
+            </p>
+            <Link
+              href="/free-sample"
+              className="inline-block mt-8 px-10 py-4 bg-cream text-charcoal font-headline text-base tracking-[0.2em] uppercase border-2 border-cream transition-all duration-300 hover:bg-transparent hover:text-cream"
+            >
+              Get the Sample
+            </Link>
+          </div>
+        </ScrollReveal>
+      </section>
+
       {/* ─── Footer ─── */}
       <footer className="py-16 px-6 sm:px-8">
         <div className="max-w-7xl mx-auto">
@@ -275,6 +298,9 @@ export default function Home() {
               </Link>
               <Link href="/wholesale" className="hover:text-cream transition-colors duration-300">
                 Wholesale
+              </Link>
+              <Link href="/free-sample" className="hover:text-cream transition-colors duration-300">
+                Free Sample
               </Link>
             </nav>
 
