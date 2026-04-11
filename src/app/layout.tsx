@@ -3,6 +3,7 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import Header from "@/components/Header";
 import CartDrawer from "@/components/CartDrawer";
+import SamplePopup from "@/components/SamplePopup";
 
 export const metadata: Metadata = {
   title: "Todah Co. | Gift Gratitude",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <CartProvider>
           <Header />
           <CartDrawer />
+          <SamplePopup />
           {children}
         </CartProvider>
       </body>
